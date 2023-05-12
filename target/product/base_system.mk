@@ -397,11 +397,7 @@ PRODUCT_PACKAGES_DEBUG := \
     unwind_info \
     unwind_reg_info \
     unwind_symbols \
-
-ifeq ($(LINEAGE_BUILD),)
-PRODUCT_PACKAGES_DEBUG += \
-    su
-endif
+    su \
 
 # The set of packages whose code can be loaded by the system server.
 PRODUCT_SYSTEM_SERVER_APPS += \
