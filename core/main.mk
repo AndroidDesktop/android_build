@@ -364,24 +364,24 @@ user_variant := $(filter user userdebug,$(TARGET_BUILD_VARIANT))
 enable_target_debugging := true
 tags_to_install :=
 ifneq (,$(user_variant))
-  # Target is secure in user builds.
-  ADDITIONAL_SYSTEM_PROPERTIES += ro.secure=1
-  ADDITIONAL_SYSTEM_PROPERTIES += security.perf_harden=1
-
   ifeq ($(user_variant),user)
+    ADDITIONAL_SYSTEM_PROPERTIES += ro.secure=1
+    ADDITIONAL_SYSTEM_PROPERTIES += security.perf_harden=1
     ADDITIONAL_SYSTEM_PROPERTIES += ro.adb.secure=1
+    ADDITIONAL_SYSTEM_PROPERTIES += ro.allow.mock.location=0
   endif
 
   ifeq ($(user_variant),userdebug)
+    ADDITIONAL_SYSTEM_PROPERTIES += ro.secure=0
+    ADDITIONAL_SYSTEM_PROPERTIES += security.perf_harden=0
+    ADDITIONAL_SYSTEM_PROPERTIES += ro.adb.secure=0
+    ADDITIONAL_SYSTEM_PROPERTIES += ro.allow.mock.location=1
     # Pick up some extra useful tools
     tags_to_install += debug
   else
     # Disable debugging in plain user builds.
     enable_target_debugging :=
   endif
-
-  # Disallow mock locations by default for user builds
-  ADDITIONAL_SYSTEM_PROPERTIES += ro.allow.mock.location=0
 
 else # !user_variant
   # Turn on checkjni for non-user builds.
