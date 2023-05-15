@@ -22,3 +22,4 @@ PRODUCT_PACKAGES += \
     passwd_system_ext \
     selinux_policy_system_ext \
     system_ext_manifest.xml \
+    com.android.virt \
